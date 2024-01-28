@@ -13,10 +13,10 @@ database "<<MongoDB>>\n:hospitals" as HospitalsDatabase
 client->server ++:req.put('/hospitals/:id')
 server->routerHospitals ++:app.use('/hospitals/:id',hospitals)
 routerHospitals -> controllersHospitals ++:updateHospital()
-controllersHospitals->modelHospital ++:update(req.body)
-modelHospital ->HospitalsDatabase ++: HospitalSchema
-HospitalsDatabase --> modelHospital --: hospital
-controllersHospitals <-- modelHospital --:hospital
+controllersHospitals->modelHospital ++:updateById(req.params.id, req.body)
+modelHospital ->HospitalsDatabase ++: findByIdAndUpdate(req.params.id, req.body)
+HospitalsDatabase --> modelHospital --: updatedHospital
+controllersHospitals <-- modelHospital --:updatedHospital
 controllersHospitals->client --:response
 
 @enduml
