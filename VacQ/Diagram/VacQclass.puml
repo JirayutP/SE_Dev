@@ -1,4 +1,4 @@
-@startuml
+@startuml VacQ
 left to right direction
 package "VacQ"{
     class "<<Application>>\nVacQService" as VacQService{}
